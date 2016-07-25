@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Firebase Cloud Messaging
   description: Send downstream messages to client apps
-  version: 0.1.0
+  version: 1.0.0
 host: fcm.googleapis.com
 schemes:
   - https
@@ -15,7 +15,7 @@ security:
 
 paths:
   /fcm/send:
-    post: 
+    post:
       description: Send downstream messages to client apps
       parameters:
       - in: "body"
@@ -61,7 +61,7 @@ definitions:
       notification_key:
         description: |
           This parameter is deprecated. Instead, use **to** to specify message recipients. For more information on how to send messages to multiple devices using **to**, see [Device Group Messaging](https://firebase.google.com/docs/cloud-messaging/notifications).
-          type: string
+        type: string
       collapse_key:
         description: |
           This parameter identifies a group of messages (e.g., with ```"collapse_key": "Updates Available"```) that can be collapsed, so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many of the same messages when the device comes back online or becomes active (see **delay_while_idle**).
@@ -218,4 +218,3 @@ securityDefinitions:
     type: apiKey
     name: Authorization
     in: header
-
