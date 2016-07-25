@@ -12,10 +12,15 @@ consumes:
   - application/json
 security:
   - api_key: []
+tags:
+  - name: FCM
+    description: Firebase Cloud Messaging
 
 paths:
   /fcm/send:
     post:
+      tags:
+      - FCM
       description: Send downstream messages to client apps
       parameters:
       - in: "body"
