@@ -40,7 +40,7 @@ paths:
           description: There was an error authenticating the sender account.
         default:
           description: Errors in the 500-599 range (such as 500 or 503) indicate that there was an internal error in the FCM connection server while trying to process the request, or that the server is temporarily unavailable (for example, because of timeouts). Sender must retry later, honoring any **Retry-After** header included in the response. Application servers must implement exponential back-off.
-  
+
 definitions:
   Message:
     type: object
@@ -52,10 +52,10 @@ definitions:
         type: string
       registration_ids:
         description: |
-          This parameter specifies a list of devices (registration tokens, or IDs) receiving a multicast message. It must contain at least 1 and at most 1000 registration tokens. 
+          This parameter specifies a list of devices (registration tokens, or IDs) receiving a multicast message. It must contain at least 1 and at most 1000 registration tokens.
           Use this parameter only for multicast messaging, not for single recipients. Multicast messages (sending to more than 1 registration tokens) are allowed using HTTP JSON format only.
         type: array
-        items: 
+        items:
           type: string
       condition:
         description: |
@@ -85,6 +85,10 @@ definitions:
       content_available:
         description: |
           On iOS, use this field to represent **content-available** in the APNS payload. When a notification or message is sent and this is set to ```true```, an inactive client app is awoken. On Android, data messages wake the app by default. On Chrome, currently not supported.
+        type: boolean
+      mutable_content:
+        description: |
+          Currently for iOS 10+ devices only. On iOS, use this field to represent mutable-content in the APNS payload. When a notification is sent and this is set to true, the content of the notification can be modified before it is displayed, using a [Notification Service app extension](https://developer.apple.com/reference/usernotifications/unnotificationserviceextension). This parameter will be ignored for Android and web.
         type: boolean
       delay_while_idle:
         description: |
@@ -133,7 +137,7 @@ definitions:
         type: string
       sound:
         description: |
-          Indicates a sound to play when the device receives a notification. 
+          Indicates a sound to play when the device receives a notification.
           * iOS: Sound files can be in the main bundle of the client app or in the Library/Sounds folder of the app's data container. See the [iOS Developer Library](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW6) for more information).
           * android: Supports default or the filename of a sound resource bundled in the app. Sound files must reside in /res/raw/.
         type: string
@@ -179,7 +183,7 @@ definitions:
           * iOS: Corresponds to "title-loc-args" in the APNs payload.
           * android: See [Formatting strings](https://developer.android.com/guide/topics/resources/string-resource.html#FormattingAndStyling).
         type: string
-  
+
   Response:
     type: object
     description: Downstream message response body
@@ -196,7 +200,7 @@ definitions:
       canonical_ids:
         description: Number of results that contain a canonical registration token. See the [registration overview](https://firebase.google.com/docs/cloud-messaging/android/client#canonical-ids) for more discussion of this topic.
         type: number
-      results: 
+      results:
         type: array
         items:
           $ref: "#/definitions/Result"
